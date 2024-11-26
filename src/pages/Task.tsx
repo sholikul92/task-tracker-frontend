@@ -17,6 +17,7 @@ export const Task = () => {
   const [tasks, setTasks] = useState<ApiResponse[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [refetch, setRefecth] = useState<boolean>(false);
   // const base_url = import.meta.env.VITE_BASE_URL;
 
   const fetchApi = async () => {
@@ -29,15 +30,16 @@ export const Task = () => {
       }
     } finally {
       setLoading(false);
+      setRefecth(false);
     }
   };
 
   useEffect(() => {
     fetchApi();
-  }, []);
+  }, [refetch]);
 
   const TaskList = tasks?.map((task) => {
-    return <TaskItem title={task.title} priority={task.priority} deadline={task.deadline} completed={task.completed} key={task.id} />;
+    return <TaskItem task={task} key={task.id} setRefetch={setRefecth} />;
   });
 
   if (error != null) {
@@ -47,7 +49,7 @@ export const Task = () => {
   return (
     <div className='bg-[#E9EDF2] min-h-screen px-56 pt-10'>
       <Header />
-      {loading ? <MoonLoader /> : <div className='flex flex-col items-center border'>{tasks?.length == 0 ? <TaskEmpty /> : TaskList}</div>}
+      <div className='flex flex-col items-center'>{loading ? <MoonLoader /> : tasks?.length == 0 ? <TaskEmpty /> : TaskList}</div>
     </div>
   );
 };
