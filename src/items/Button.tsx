@@ -1,6 +1,7 @@
 type Props = {
   title: string;
   handleClick?: () => void;
+  type?: string;
 };
 
 export const Button = (props: Props) => {
