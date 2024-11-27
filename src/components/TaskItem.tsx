@@ -57,7 +57,7 @@ export const TaskItem: React.FC<Props> = ({ task, setRefetch }) => {
           </div>
           <div className='flex gap-1 items-center'>
             <RiHourglass2Fill className='text-lg' />
-            {task.completed ? "In Progress" : "Completed"}
+            {task.completed ? "Completed" : "In Progress"}
           </div>
         </div>
       </div>
