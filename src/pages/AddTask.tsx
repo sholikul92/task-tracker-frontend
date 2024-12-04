@@ -20,7 +20,7 @@ export const AddTask = () => {
     let { name, value } = event.currentTarget;
 
     if (name === "deadline") {
-      value = `${value}:00Z`;
+      value = `${value}:00+07:00`;
     }
 
     setData({
@@ -37,6 +37,8 @@ export const AddTask = () => {
       });
 
       if (response.status == 201) {
+        console.log(data);
+
         handleNavigate();
       }
     } catch (err) {
