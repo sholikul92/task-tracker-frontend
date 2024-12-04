@@ -5,6 +5,8 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { PiCellSignalLowFill, PiCellSignalMediumFill, PiCellSignalFullFill } from "react-icons/pi";
 import axios from "axios";
+import { formatDate } from "../helper/formatDate";
+import { firstWordCapital } from "../helper/firstWordCapital";
 
 interface TaskProps {
   ID: number;
@@ -42,13 +44,15 @@ export const TaskItem: React.FC<Props> = ({ task, setRefetch }) => {
     }
   };
 
+  const date = formatDate(task.deadline);
+
   return (
     <section className='bg-white w-full rounded-lg my-2 p-4 flex items-center'>
       <div className='flex flex-col gap-2 flex-1'>
-        <h3 className='text-2xl font-semibold'>{task.title}</h3>
+        <h3 className='text-2xl font-semibold'>{firstWordCapital(task.title)}</h3>
         <div className='flex gap-1 items-center'>
           <IoMdTime className='text-xl' />
-          <p>{task.deadline.toLocaleString()}</p>
+          <p>{date}</p>
         </div>
         <div className='flex gap-4'>
           <div className='flex gap-1 items-center'>
