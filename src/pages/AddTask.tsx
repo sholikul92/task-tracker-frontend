@@ -32,9 +32,13 @@ export const AddTask = () => {
   const handleForm = async (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:8080/task/add", {
+      const response = await axios.post("http://localhost:8080/task/add", {
         ...data,
       });
+
+      if (response.status == 201) {
+        handleNavigate();
+      }
     } catch (err) {
       if (err == axios.AxiosError) {
         console.log(err);
@@ -104,7 +108,7 @@ export const AddTask = () => {
                 required
               />
 
-              <Button title='Save New Task' type='submit' handleClick={handleNavigate} />
+              <Button title='Save New Task' type='submit' />
             </form>
           </section>
         </section>
