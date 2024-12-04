@@ -7,6 +7,7 @@ import { PiCellSignalLowFill, PiCellSignalMediumFill, PiCellSignalFullFill } fro
 import axios from "axios";
 import { formatDate } from "../helper/formatDate";
 import { firstWordCapital } from "../helper/firstWordCapital";
+import { useNavigate } from "react-router-dom";
 
 interface TaskProps {
   ID: number;
@@ -23,6 +24,7 @@ interface Props {
 
 export const TaskItem: React.FC<Props> = ({ task, setRefetch }) => {
   const [statusCompleted, setStatusCompleted] = useState<boolean>(task.completed);
+  const navigate = useNavigate();
   const getIconTaskPriority = (priority: string) => {
     switch (priority) {
       case "Low":
@@ -57,6 +59,10 @@ export const TaskItem: React.FC<Props> = ({ task, setRefetch }) => {
     }
   };
 
+  const handleNavigate = (id: number) => {
+    navigate(`/edit/${id}`);
+  };
+
   const date = formatDate(task.deadline);
 
   return (
@@ -79,7 +85,7 @@ export const TaskItem: React.FC<Props> = ({ task, setRefetch }) => {
         </div>
       </div>
       <div className='text-3xl flex gap-4'>
-        <button>
+        <button onClick={() => handleNavigate(task.ID)}>
           <FaRegEdit className='text-blue-700 hover:text-blue-800' />
         </button>
         <button onClick={() => deleteTask(task.ID)}>
