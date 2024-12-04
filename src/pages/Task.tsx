@@ -48,7 +48,7 @@ export const Task = () => {
 
   return (
     <div className='bg-[#E9EDF2] min-h-screen px-56 pt-10'>
-      <Header />
+      <Header path='/add' value='Add Task' />
       <div className='flex flex-col items-center'>{loading ? <MoonLoader /> : tasks?.length == 0 ? <TaskEmpty /> : TaskList}</div>
     </div>
   );

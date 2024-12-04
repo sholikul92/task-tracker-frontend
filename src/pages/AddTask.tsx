@@ -55,7 +55,7 @@ export const AddTask = () => {
   return (
     <>
       <div className='bg-[#E9EDF2] min-h-screen px-56 pt-10'>
-        <Header />
+        <Header path='/' value='Manage Task' />
         <section className='m-4 md:mx-48'>
           <section className='flex flex-col items-center'>
             <h1 className='text-4xl font-bold'>Add New Task</h1>
