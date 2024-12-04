@@ -7,7 +7,7 @@ import { PiCellSignalLowFill, PiCellSignalMediumFill, PiCellSignalFullFill } fro
 import axios from "axios";
 
 interface TaskProps {
-  id: number;
+  ID: number;
   title: string;
   priority: string;
   deadline: Date;
@@ -65,7 +65,7 @@ export const TaskItem: React.FC<Props> = ({ task, setRefetch }) => {
         <button>
           <FaRegEdit className='text-blue-700 hover:text-blue-800' />
         </button>
-        <button onClick={() => deleteTask(task.id)}>
+        <button onClick={() => deleteTask(task.ID)}>
           <MdDelete className='text-red-700 hover:text-red-800' />
         </button>
         <button>

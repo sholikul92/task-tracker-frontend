@@ -6,7 +6,7 @@ import axios from "axios";
 import { MoonLoader } from "react-spinners";
 
 interface ApiResponse {
-  id: number;
+  ID: number;
   title: string;
   priority: string;
   deadline: Date;
@@ -39,7 +39,7 @@ export const Task = () => {
   }, [refetch]);
 
   const TaskList = tasks?.map((task) => {
-    return <TaskItem task={task} key={task.id} setRefetch={setRefecth} />;
+    return <TaskItem task={task} key={task.ID} setRefetch={setRefecth} />;
   });
 
   if (error != null) {
