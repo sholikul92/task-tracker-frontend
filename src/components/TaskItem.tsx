@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoMdTime, IoMdDoneAll } from "react-icons/io";
 import { RiHourglass2Fill } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
@@ -22,6 +22,7 @@ interface Props {
 }
 
 export const TaskItem: React.FC<Props> = ({ task, setRefetch }) => {
+  const [statusCompleted, setStatusCompleted] = useState<boolean>(task.completed);
   const getIconTaskPriority = (priority: string) => {
     switch (priority) {
       case "Low":
@@ -38,6 +39,18 @@ export const TaskItem: React.FC<Props> = ({ task, setRefetch }) => {
       const response = await axios.delete(`http://localhost:8080/task/delete/${id}`);
       if (response.status == 200) {
         setRefetch(true);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const completedTask = async (id: number) => {
+    try {
+      const response = await axios.patch(`http://localhost:8080/task/update-status/${id}?status=${!statusCompleted}`);
+
+      if (response.status == 201) {
+        setStatusCompleted(!statusCompleted);
       }
     } catch (err) {
       console.log(err);
@@ -61,7 +74,7 @@ export const TaskItem: React.FC<Props> = ({ task, setRefetch }) => {
           </div>
           <div className='flex gap-1 items-center'>
             <RiHourglass2Fill className='text-lg' />
-            {task.completed ? "Completed" : "In Progress"}
+            {statusCompleted ? "Completed" : "In Progress"}
           </div>
         </div>
       </div>
@@ -72,7 +85,7 @@ export const TaskItem: React.FC<Props> = ({ task, setRefetch }) => {
         <button onClick={() => deleteTask(task.ID)}>
           <MdDelete className='text-red-700 hover:text-red-800' />
         </button>
-        <button>
+        <button onClick={() => completedTask(task.ID)}>
           <IoMdDoneAll className='text-green-700 hover:text-green-800' />
         </button>
       </div>
