@@ -12,11 +12,12 @@ interface Task {
 
 interface Props {
   task: Task;
+  valueButton: string;
   onSubmit: (event: React.FormEvent<HTMLElement>) => Promise<void>;
   onChange: (event: React.FormEvent<HTMLInputElement | HTMLSelectElement>) => void;
 }
 
-export const TaskForm: React.FC<Props> = ({ task, onSubmit, onChange }) => {
+export const TaskForm: React.FC<Props> = ({ task, valueButton, onSubmit, onChange }) => {
   return (
     <form id='form-add-task' method='POST' className='bg-white w-96 flex flex-col p-8 rounded-2xl gap-2' onSubmit={onSubmit}>
       <label htmlFor='title' className='text-xl font-semibold'>
@@ -69,7 +70,7 @@ export const TaskForm: React.FC<Props> = ({ task, onSubmit, onChange }) => {
         required
       />
 
-      <Button title='Update Task' type='submit' />
+      <Button title={valueButton} type='submit' />
     </form>
   );
 };
