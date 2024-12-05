@@ -53,6 +53,7 @@ export const TaskItem: React.FC<Props> = ({ task, setRefetch }) => {
 
       if (response.status == 201) {
         setStatusCompleted(!statusCompleted);
+        setRefetch(true);
       }
     } catch (err) {
       console.log(err);
