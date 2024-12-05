@@ -77,7 +77,7 @@ export const EditTask = () => {
             <p className='text-gray-700'>Set goals to develop yourself</p>
           </section>
           <section className='flex justify-center mt-12'>
-            <TaskForm task={data} onSubmit={handleForm} onChange={handleInput} />
+            <TaskForm valueButton='Update Task' task={data} onSubmit={handleForm} onChange={handleInput} />
           </section>
         </section>
       </div>
